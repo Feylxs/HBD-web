@@ -1,34 +1,44 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger"; // <-- 1. Import ScrollTrigger
 import { T } from "../constants/theme";
+
+// 2. Register plugin
+gsap.registerPlugin(ScrollTrigger);
 
 export const MessageBottle = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const [typedText, setTypedText] = useState("");
 
   const bottleRef = useRef(null);
   const corkRef = useRef(null);
   const paperRef = useRef(null);
-  const intervalRef = useRef(null);
 
-  // 180 WPM = 3 kata per detik. Rata-rata 1 kata = 5 huruf + 1 spasi = 6 huruf.
-  // 3 kata * 6 huruf = 18 huruf per detik. (1000ms / 18 = ~55ms per huruf)
-  const fullText = `Dear Yayaa,
-  Selamat ulang tahunn yaa yayaa yang kee 17/18, akuu lupaa maaff yaa. Nggaa adaa yang bisaa aku ungkapin banyakk sii karena yaa
-  disini aku cuma bisaa mintaa maaff dari apaa yang aku lakuin sebelumnyaa. Maafff pesan-pesan kamu yang waktu itu gaa aku
-  akhirnya WA akupun aku matiin. Aku mintaa maaff baru bisa show bukaa, disitu posisi akuu uda bener-bener gaa karuan dan yaa
-  kamu makin bahagia, dikelilingi orang-orang yang sayang sama up lagi sekarangg. Di umur kamu yang baru ini, aku berdoa semoga
-  jadi orang yang baik buat aku. Kamu ngga harus balas pesan ini kamu, dan semua urusan kamu dilancarin. Makasih yaa udah pernah
-  Bahagia terus yaa, Yayaa.
-  kok, aku cuma mau ngucapin selamat dan minta maaf dengan bener.
+  const fullText = `[ Bogor ], [ 17/08/2026 ]
 
-"Finn"`;
+Dear Yayaa,
+Selamat ulang tahunn yaa yayaa yang kee 17/18, akuu lupaa maaff
+yaa. Nggaa adaa yang bisaa aku ungkapin banyakk sii karena yaa
+disini aku cuma bisaa mintaa maaff dari apaa yang aku lakuin
+sebelumnyaa. Maafff pesan-pesan kamu yang waktu itu gaa aku
+bukaa, disitu posisi akuu uda bener-bener gaa karuan dan yaa
+akhirnya WA akupun aku matiin. Aku mintaa maaff baru bisa show
+up lagi sekarangg. Di umur kamu yang baru ini, aku berdoa semoga
+kamu makin bahagia, dikelilingi orang-orang yang sayang sama
+kamu, dan semua urusan kamu dilancarin. Makasih yaa udah pernah
+jadi orang yang baik buat aku. Kamu ngga harus balas pesan ini
+kok, aku cuma mau ngucapin selamat dan minta maaf dengan bener.
+Bahagia terus yaa, Yayaa.
+Finn`;
 
   const handleOpen = () => {
     if (isOpened) return;
     setIsOpened(true);
 
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      // 3. Tambahkan ini agar setelah animasi selesai, ScrollTrigger menghitung ulang posisi timeline
+      onComplete: () => ScrollTrigger.refresh()
+    });
+
     // Animasi tutup botol melayang
     tl.to(corkRef.current, {
       y: -40,
@@ -49,30 +59,11 @@ export const MessageBottle = () => {
           height: "auto",
           opacity: 1,
           duration: 1,
-          ease: "power3.out",
-          onComplete: startTyping
+          ease: "power3.out"
         },
         "-=0.2"
       );
   };
-
-  const startTyping = () => {
-    let i = 0;
-    const speed = 26; // Kecepatan 180 WPM
-
-    intervalRef.current = setInterval(() => {
-      if (i < fullText.length) {
-        setTypedText(fullText.substring(0, i + 1));
-        i++;
-      } else {
-        clearInterval(intervalRef.current);
-      }
-    }, speed);
-  };
-
-  useEffect(() => {
-    return () => clearInterval(intervalRef.current);
-  }, []);
 
   return (
     <div
@@ -186,11 +177,7 @@ export const MessageBottle = () => {
               fontFamily: 'Georgia, "Times New Roman", serif'
             }}
           >
-            {typedText}
-            {/* Kursor Berkedip saat mengetik */}
-            {isOpened && typedText.length < fullText.length && (
-              <span className="typewriter-cursor">|</span>
-            )}
+            {fullText}
           </div>
         </div>
       </div>
