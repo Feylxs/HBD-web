@@ -11,6 +11,7 @@ import { Gallery } from "./components/Gallery";
 import { Cake } from "./components/Cake";
 import { T } from "./constants/theme";
 import "./styles/GlobalStyles.css";
+import { MessageBottle } from "./components/MessageBottle";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false); // <-- State Autentikasi
@@ -166,81 +167,13 @@ export default function App() {
             </div>
           </section>
 
-          {/* SURAT */}
           <section style={section()}>
             <SectionHeader
               eyebrow="Sebuah Surat"
               subtitle="ditulis dengan tangan yang sedikit gemetar"
             />
-            <div
-              className="reveal-element letter-paper"
-              style={{
-                borderRadius: 4,
-                padding: "clamp(28px,7vw,56px) clamp(28px,7vw,52px)",
-                boxShadow:
-                  "0 32px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.6)",
-                color: "#3d3530",
-                lineHeight: 1.95
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "0.7rem",
-                  color: "#9c9585",
-                  marginBottom: 28,
-                  fontFamily: "monospace",
-                  letterSpacing: "0.05em"
-                }}
-              >
-                [ Bogor ], [ 17/08/2026 ]
-              </p>
-              <p
-                style={{
-                  marginBottom: 24,
-                  fontSize: "clamp(0.92rem,2.5vw,1.02rem)"
-                }}
-              >
-                Dear <em>Yayaa</em>,
-              </p>
-              <p
-                style={{
-                  marginBottom: 20,
-                  color: "#4a4039",
-                  fontSize: "clamp(0.88rem,2.3vw,0.97rem)"
-                }}
-              >
-                Selamat ulang tahunn yaa yayaa yang kee 17/18, akuu lupaa maaff
-                yaa. Nggaa adaa yang bisaa aku ungkapin banyakk sii karena yaa
-                disini aku cuma bisaa mintaa maaff dari apaa yang aku lakuin
-                sebelumnyaa. Maafff pesan-pesan kamu yang waktu itu gaa aku
-                bukaa, disitu posisi akuu uda bener-bener gaa karuan dan yaa
-                akhirnya WA akupun aku matiin. Aku mintaa maaff baru bisa show
-                up lagi sekarangg. Di umur kamu yang baru ini, aku berdoa semoga
-                kamu makin bahagia, dikelilingi orang-orang yang sayang sama
-                kamu, dan semua urusan kamu dilancarin. Makasih yaa udah pernah
-                jadi orang yang baik buat aku. Kamu ngga harus balas pesan ini
-                kok, aku cuma mau ngucapin selamat dan minta maaf dengan bener.
-                Bahagia terus yaa, Yayaa.
-              </p>
-              <p
-                style={{
-                  fontStyle: "italic",
-                  color: "#3d3530",
-                  fontSize: "clamp(0.9rem,2.3vw,1rem)"
-                }}
-              >
-                Dengan sepenuh hati,
-                <br />
-                <span
-                  style={{
-                    display: "block",
-                    marginTop: 10,
-                    fontSize: "1.2rem"
-                  }}
-                >
-                  [ Finn ]
-                </span>
-              </p>
+            <div className="reveal-element">
+              <MessageBottle />
             </div>
           </section>
 

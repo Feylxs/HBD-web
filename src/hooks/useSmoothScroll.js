@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "@studio-freight/lenis";
-import { T } from "../constants/theme"; // Pastikan T diimpor untuk warna emas
+import { T } from "../constants/theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,19 +43,19 @@ export const useSmoothScroll = (isActive) => {
       }
     });
 
-    // 3. Timeline Node "Light Up" Animation (BARU)
+    // 3. Timeline Node "Light Up" Animation
     gsap.utils.toArray(".timeline-node").forEach((node) => {
       gsap.to(node, {
-        backgroundColor: T.gold, // Isi lingkaran berubah menjadi emas
-        borderColor: "#f0c97f", // Border sedikit lebih terang
-        boxShadow: `0 0 12px ${T.gold}, 0 0 24px rgba(201,165,104,0.8)`, // Efek menyala
-        scale: 1.4, // Sedikit membesar
+        backgroundColor: T.gold,
+        borderColor: "#f0c97f",
+        boxShadow: `0 0 12px ${T.gold}, 0 0 24px rgba(201,165,104,0.8)`,
+        scale: 1.4,
         duration: 0.4,
         ease: "power2.out",
         scrollTrigger: {
           trigger: node,
-          start: "top 70%", // Mulai menyala saat node masuk 70% layar (sejajar dengan garis)
-          toggleActions: "play none none reverse" // Saat scroll balik ke atas, node akan padam kembali
+          start: "top 70%",
+          toggleActions: "play none none reverse"
         }
       });
     });
@@ -75,7 +75,14 @@ export const useSmoothScroll = (isActive) => {
       });
     });
 
+    // === SOLUSI: Paksa ScrollTrigger menghitung ulang posisi setelah render selesai ===
+    // Karena kita pakai setTimeout 100ms, ada delay sedikit tapi pasti work!
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
     return () => {
+      clearTimeout(refreshTimeout);
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
