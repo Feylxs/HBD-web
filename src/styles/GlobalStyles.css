@@ -1,0 +1,128 @@
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+::selection { 
+  background: #e3a4c2; 
+  color: #110d16; 
+}
+
+/* PAKSA scrollbar hilang di semua browser */
+html, body, #root {
+  background: #110d16;
+  -ms-overflow-style: none !important;  /* IE dan Edge */
+  scrollbar-width: none !important;     /* Firefox */
+  overflow-x: hidden !important;
+}
+
+/* Target khusus untuk WebKit (Chrome, Safari, Opera) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+/* ... (lanjutan kode CSS Anda yang lain mulai dari @keyframes petalFall dst...) */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: #e3a4c2; color: #110d16; }
+
+/* Sembunyikan Scrollbar Bawaan */
+html, body {
+  background: #110d16;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+@keyframes petalFall {
+  from { opacity: 0; transform: translateY(-20px) translateX(0) rotate(0deg); }
+  5%   { opacity: 0.7; }
+  95%  { opacity: 0.2; }
+  to   { opacity: 0; transform: translateY(110vh) translateX(var(--drift)) rotate(380deg); }
+}
+@keyframes flicker {
+  0%,100% { transform: scaleY(1) skewX(0deg);   opacity: 1; }
+  20%     { transform: scaleY(0.9) skewX(3deg);  opacity: 0.85; }
+  60%     { transform: scaleY(1.1) skewX(-2deg); opacity: 0.9; }
+}
+@keyframes pulseGold { 0%,100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+@keyframes shimmerGold { 0%,100% { color: #c9a568; } 50% { color: #f0c97f; } }
+
+/* Scroll Progress Bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, #c9a568, #e3a4c2);
+  z-index: 999; box-shadow: 0 0 10px rgba(201,165,104,0.6);
+}
+
+/* ReactBits: Animated Gradient Text */
+.reactbits-text {
+  background: linear-gradient(90deg, #c9a568, #f0c97f, #e3a4c2, #c9a568);
+  background-size: 300% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineText 6s linear infinite;
+}
+@keyframes shineText { to { background-position: 300% center; } }
+
+.petal { position: fixed; top: -20px; animation: petalFall linear infinite; pointer-events: none; z-index: 5; }
+.flame { animation: flicker 1.6s ease-in-out infinite; transform-origin: bottom center; }
+.pulse-gold { animation: pulseGold 2.8s ease-in-out infinite; }
+.shimmer-gold { animation: shimmerGold 3s ease-in-out infinite; }
+
+.rule { display: flex; align-items: center; gap: 14px; max-width: 260px; margin: 0 auto; }
+.rule::before, .rule::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, transparent, #c9a568 60%, transparent); }
+
+.letter-paper {
+  background: #faf5ec;
+  background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(180,165,150,0.18) 31px, rgba(180,165,150,0.18) 32px);
+  position: relative;
+}
+.letter-paper::before { content: ''; position: absolute; left: 56px; top: 0; bottom: 0; width: 1px; background: rgba(196,130,130,0.25); pointer-events: none; }
+
+.spotlight-card { position: relative; overflow: hidden; isolation: isolate; transition: transform 0.3s ease, border-color 0.3s ease; }
+.spotlight-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(201,165,104,0.15), transparent 40%);
+  opacity: 0; transition: opacity 0.3s ease; z-index: 0; pointer-events: none;
+}
+.spotlight-card:hover::before { opacity: 1; }
+
+.timeline-node { transition: box-shadow 0.3s ease; }
+.timeline-node:hover { box-shadow: 0 0 0 4px rgba(201,165,104,0.15), 0 0 16px rgba(201,165,104,0.4); }
+
+.polaroid { transition: transform 0.5s ease, box-shadow 0.5s ease; transform-style: preserve-3d; }
+.polaroid img { filter: grayscale(100%); transition: filter 0.7s ease; }
+.polaroid:hover img { filter: grayscale(0%); }
+
+.candle-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; padding: 8px 6px; transition: transform 0.15s ease; position: relative; z-index: 2; }
+.candle-btn:hover { transform: scale(1.06); }
+.candle-btn:active { transform: scale(0.97); }
+.candle-btn:focus-visible { outline: 2px solid #c9a568; border-radius: 6px; }
+
+.env-flap { transform-origin: top center; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.env-wrap:hover .env-flap { transform: rotateX(-170deg); }
+.env-wrap { perspective: 600px; }
+.env-btn { background: none; border: none; cursor: pointer; transition: transform 0.4s ease; }
+.env-btn:hover { transform: scale(1.04); }
+
+.audio-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(227,164,194,0.3); color: #f6eef0; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(14px); z-index: 100; }
+.audio-btn:hover { background: rgba(255,255,255,0.14); transform: scale(1.1); }
+.audio-btn:active { transform: scale(0.95); }
+
+/* CSS Cake Styling */
+.cake-container { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
+.cake-plate { width: 100%; height: 14px; background: linear-gradient(to bottom, #d4c4a8, #b3a48a); border-radius: 50%; margin-top: -6px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); z-index: 1; }
+.cake-body { position: relative; width: 90%; margin: 0 auto; background: linear-gradient(to bottom, #4a2e20 0%, #3a2418 100%); border-radius: 12px 12px 4px 4px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 15px; gap: clamp(10px, 3vw, 20px); z-index: 2; }
+.cake-icing { position: absolute; top: -10px; left: 0; right: 0; height: 25px; background: #efe3d6; border-radius: 12px; box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1); }
+.cake-drip { position: absolute; top: 15px; left: 0; right: 0; height: 20px; background: #efe3d6; border-radius: 0 0 50% 50%; opacity: 0.9; clip-path: polygon(0 0, 100% 0, 95% 100%, 90% 0, 85% 100%, 80% 0, 75% 100%, 70% 0, 65% 100%, 60% 0, 55% 100%, 50% 0, 45% 100%, 40% 0, 35% 100%, 30% 0, 25% 100%, 20% 0, 15% 100%, 10% 0, 5% 100%, 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

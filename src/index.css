@@ -1,0 +1,95 @@
+@import "tailwindcss";
+:root {
+  --blush: #f0c6d8;
+  --rose: #e3a4c2;
+}
+
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.petals span {
+  position: absolute;
+  top: -40px;
+  width: 10px;
+  height: 14px;
+  background: linear-gradient(180deg, var(--blush), var(--rose));
+  border-radius: 60% 0 60% 0;
+  opacity: 0.55;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  90% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(280deg);
+    opacity: 0;
+  }
+}
+
+/* ─── Lightbox / Modal Foto ─── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 13, 22, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  cursor: zoom-out;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  cursor: zoom-in;
+  transform: scale(0.9);
+  opacity: 0;
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #f6eef0;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  z-index: 1001;
+}
+
+.lightbox-close:hover {
+  color: #c9a568;
+  transform: rotate(90deg);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
