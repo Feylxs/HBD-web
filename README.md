@@ -114,7 +114,7 @@ Note: Authentication and security components are not included in this public str
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Feylxs/HBD-web
-   cd digital-birthday-letter
+   cd HBD-web
    ```
 
 2. **Install dependencies**
