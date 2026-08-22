@@ -9,15 +9,13 @@
   color: #110d16; 
 }
 
-/* PAKSA scrollbar hilang di semua browser */
 html, body, #root {
   background: #110d16;
-  -ms-overflow-style: none !important;  /* IE dan Edge */
-  scrollbar-width: none !important;     /* Firefox */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;     
   overflow-x: hidden !important;
 }
 
-/* Target khusus untuk WebKit (Chrome, Safari, Opera) */
 html::-webkit-scrollbar,
 body::-webkit-scrollbar,
 #root::-webkit-scrollbar,
@@ -28,11 +26,9 @@ body::-webkit-scrollbar,
   background: transparent !important;
 }
 
-/* ... (lanjutan kode CSS Anda yang lain mulai dari @keyframes petalFall dst...) */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 ::selection { background: #e3a4c2; color: #110d16; }
 
-/* Sembunyikan Scrollbar Bawaan */
 html, body {
   background: #110d16;
   -ms-overflow-style: none;
@@ -54,14 +50,12 @@ body::-webkit-scrollbar { display: none; width: 0; height: 0; }
 @keyframes pulseGold { 0%,100% { opacity: 0.4; } 50% { opacity: 0.9; } }
 @keyframes shimmerGold { 0%,100% { color: #c9a568; } 50% { color: #f0c97f; } }
 
-/* Scroll Progress Bar */
 .scroll-progress {
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
   background: linear-gradient(90deg, #c9a568, #e3a4c2);
   z-index: 999; box-shadow: 0 0 10px rgba(201,165,104,0.6);
 }
 
-/* ReactBits: Animated Gradient Text */
 .reactbits-text {
   background: linear-gradient(90deg, #c9a568, #f0c97f, #e3a4c2, #c9a568);
   background-size: 300% auto;
@@ -116,7 +110,6 @@ body::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .audio-btn:hover { background: rgba(255,255,255,0.14); transform: scale(1.1); }
 .audio-btn:active { transform: scale(0.95); }
 
-/* CSS Cake Styling */
 .cake-container { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
 .cake-plate { width: 100%; height: 14px; background: linear-gradient(to bottom, #d4c4a8, #b3a48a); border-radius: 50%; margin-top: -6px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); z-index: 1; }
 .cake-body { position: relative; width: 90%; margin: 0 auto; background: linear-gradient(to bottom, #4a2e20 0%, #3a2418 100%); border-radius: 12px 12px 4px 4px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 15px; gap: clamp(10px, 3vw, 20px); z-index: 2; }

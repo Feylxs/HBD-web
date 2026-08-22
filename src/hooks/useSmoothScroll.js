@@ -75,8 +75,6 @@ export const useSmoothScroll = (isActive) => {
       });
     });
 
-    // === SOLUSI: Paksa ScrollTrigger menghitung ulang posisi setelah render selesai ===
-    // Karena kita pakai setTimeout 100ms, ada delay sedikit tapi pasti work!
     const refreshTimeout = setTimeout(() => {
       ScrollTrigger.refresh();
     }, 100);

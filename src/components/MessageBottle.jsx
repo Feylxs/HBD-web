@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger"; // <-- 1. Import ScrollTrigger
+import { ScrollTrigger } from "gsap/ScrollTrigger"; 
 import { T } from "../constants/theme";
 
-// 2. Register plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export const MessageBottle = () => {
@@ -35,24 +34,20 @@ Finn`;
     setIsOpened(true);
 
     const tl = gsap.timeline({
-      // 3. Tambahkan ini agar setelah animasi selesai, ScrollTrigger menghitung ulang posisi timeline
       onComplete: () => ScrollTrigger.refresh()
     });
 
-    // Animasi tutup botol melayang
     tl.to(corkRef.current, {
       y: -40,
       opacity: 0,
       duration: 0.4,
       ease: "power2.out"
     })
-      // Botol sedikit bergetar
       .to(
         bottleRef.current,
         { rotation: -5, duration: 0.2, yoyo: true, repeat: 1 },
         "<"
       )
-      // Kertas gulir keluar
       .to(
         paperRef.current,
         {
@@ -153,7 +148,7 @@ Finn`;
           </svg>
         </div>
 
-        {/* Kertas Surat yang bergulir keluar */}
+        {/* Kertas Surat yang ka handap */}
         <div
           ref={paperRef}
           style={{

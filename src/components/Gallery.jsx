@@ -6,7 +6,6 @@ import { T } from "../constants/theme";
 export const Gallery = () => {
   const [activeImage, setActiveImage] = useState(null);
 
-  // Array data foto
   const photos = [
     { src: `/images/photo-1.jpg`, rotate: "-2deg", cap: "Foto disekolah" },
     { src: `/images/photo-2.jpg`, rotate: "1.5deg", cap: "Ini apa yaa..." },
@@ -107,7 +106,7 @@ export const Gallery = () => {
         ))}
       </div>
 
-      {/* Lightbox Modal (Muncul saat foto diklik) */}
+      {/* Lightbox Modal */}
       {activeImage && (
         <div className="lightbox-overlay" onClick={() => setActiveImage(null)}>
           <span className="lightbox-close" onClick={() => setActiveImage(null)}>

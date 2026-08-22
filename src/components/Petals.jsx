@@ -8,7 +8,6 @@ export const Petals = () => {
     duration: `${7 + Math.random() * 10}s`,
     delay: `-${Math.random() * 9}s`, 
     drift: `${(Math.random() - 0.5) * 250}px`,
-    // Ukuran diperbesar dari sebelumnya (9 + 9) menjadi (16 + 14)
     size: 16 + Math.random() * 14, 
     glyph: ["✿", "❀", "✾", "❁"][Math.floor(Math.random() * 4)]
   })), []);
@@ -18,7 +17,6 @@ export const Petals = () => {
       {petals.map((p) => (
         <span key={p.id} className="petal" style={{
           left: p.left, 
-          // Warna lebih jelas (alpha 90)
           color: `${T.pink}90`, 
           fontSize: p.size,
           animationDuration: p.duration, 
